@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c(u(n6#+19-jcu9jdkvh42ts6)$vn@fvhwbcl(!y$v_^)qd4dm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG',False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,7 +84,7 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
+if 'DATABASE_URL' in os.environ :
     DATABASES = {'default': dj_database_url.config()}
 
 
