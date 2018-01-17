@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+            <div class="content">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" data-background-color="red">
+                            <h4 class="title" id="pocket-balance">My Purchases</h4>
+                            <!-- <p class="category" id="pocket-name">Recent payments made into and out of your account</p> -->
+                        </div>
+
+                        <div class="card-content">
+                            <ol>
+                            {% for purchase in purchases|dictsortreversed:"stamp" %}
+                                    <li>                                        
+                                        <strong>{{ purchase.media }} @ R{{ purchase.price  }}</strong><br/>
+                                        <small>{{purchase.media.description}}</small><br/>
+                                        <a class="text-success" href="{% url 'player' purchase.media.id %}"><i class="glyphicon glyphicon-play"></i> Play Media</a>
+                                    </li>
+                            {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% include 'footer.html' %}    
+{% endblock %}

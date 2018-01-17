@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %} {{ request.session.active_side_pane | capfirst }}{% endblock %}
+
+{% block content %}
+
+            <div class="content">
+                {% for playlist in playlists %}
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" data-background-color="red">
+                            <h4 class="title" id="pocket-balance">{{ playlist.name }}</h4>
+                            <!-- <p class="category" id="pocket-name">Recent payments made into and out of your account</p> -->
+                        </div>
+
+                        <div class="card-content">
+                            <ol>
+                            {% for purchase in playlist.media.all %}
+                                    <li>                                        
+                                        <strong>{{ purchase.name }} @ R{{ purchase.price  }}</strong><br/>
+                                        <small>{{purchase.description}}</small><br/>
+                                        <a class="text-success" href="{% url 'player' purchase.id %}"><i class="glyphicon glyphicon-shopping-cart"></i> Play/Purchase</a>
+                                    </li>
+                            {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+{% include 'footer.html' %}    
+{% endblock %}
