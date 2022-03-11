@@ -6,7 +6,7 @@ django-tastypie==0.14.0
 gunicorn==19.7.1
 idna==2.6
 olefile==0.44
-Pillow==4.2.1
+Pillow==9.0.1
 psycopg2==2.7.3.2
 python-dateutil==2.6.1
 python-freshdesk==1.1.0
